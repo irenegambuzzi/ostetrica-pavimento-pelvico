@@ -1,5 +1,7 @@
 window.addEventListener('scroll', reveal);
-window.addEventListener('scroll', scrollProgress); // Aggiunto listener per progress bar
+window.addEventListener('scroll', scrollProgress);
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function reveal() {
     const reveals = document.querySelectorAll('.reveal');
@@ -16,32 +18,29 @@ function reveal() {
 }
 
 // Esegui una volta al caricamento per mostrare la Hero
-document.addEventListener("DOMContentLoaded", function() {
-    reveal();
-    checkCookies();
-});
+document.addEventListener("DOMContentLoaded", reveal);
 
-// Effetto Parallasse Mouse per i Blob
-document.addEventListener('mousemove', (e) => {
-    const blobs = document.querySelectorAll('.blob');
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
+// Effetto Parallasse Mouse per i Blob (disattivato se l'utente preferisce meno animazioni)
+if (!reduceMotion) {
+    document.addEventListener('mousemove', (e) => {
+        const blobs = document.querySelectorAll('.blob');
 
-    blobs.forEach((blob, index) => {
-        const speed = (index + 1) * 20; // Velocità diversa per ogni blob
-        const xOffset = (window.innerWidth / 2 - e.clientX) / speed;
-        const yOffset = (window.innerHeight / 2 - e.clientY) / speed;
-        
-        blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        blobs.forEach((blob, index) => {
+            const speed = (index + 1) * 20; // Velocità diversa per ogni blob
+            const xOffset = (window.innerWidth / 2 - e.clientX) / speed;
+            const yOffset = (window.innerHeight / 2 - e.clientY) / speed;
+
+            blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
     });
-});
+}
 
 // Accordion FAQ
 const accordionItems = document.querySelectorAll('.accordion-item');
 
 accordionItems.forEach(item => {
     const header = item.querySelector('.accordion-header');
-    
+
     header.addEventListener('click', () => {
         item.classList.toggle('active');
         const content = item.querySelector('.accordion-content');
@@ -58,63 +57,20 @@ const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
 const navLinks = document.querySelectorAll('.nav-links li');
 
+function setMenu(open) {
+    nav.classList.toggle('nav-active', open);
+    burger.classList.toggle('toggle', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Chiudi il menù' : 'Apri il menù');
+}
+
 burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
+    setMenu(!nav.classList.contains('nav-active'));
 });
 
 // Chiudi menu quando si clicca un link
 navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('nav-active');
-        burger.classList.remove('toggle');
-    });
-});
-
-// Animazione Numeri (Counters)
-const counters = document.querySelectorAll('.counter');
-let hasAnimated = false;
-
-window.addEventListener('scroll', () => {
-    const statsSection = document.querySelector('.stats');
-    const sectionPos = statsSection.getBoundingClientRect().top;
-    const screenPos = window.innerHeight / 1.3;
-
-    if (sectionPos < screenPos && !hasAnimated) {
-        counters.forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            const increment = target / 100; // Velocità
-            
-            const updateCounter = () => {
-                const c = +counter.innerText;
-                if (c < target) {
-                    counter.innerText = Math.ceil(c + increment);
-                    setTimeout(updateCounter, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCounter();
-        });
-        hasAnimated = true;
-    }
-});
-
-// Cookie Banner Logic
-const cookieBanner = document.getElementById('cookie-banner');
-const acceptBtn = document.getElementById('accept-cookies');
-
-function checkCookies() {
-    if (!localStorage.getItem('cookiesAccepted')) {
-        setTimeout(() => {
-            cookieBanner.classList.add('show');
-        }, 2000); // Appare dopo 2 secondi
-    }
-}
-
-acceptBtn.addEventListener('click', () => {
-    cookieBanner.classList.remove('show');
-    localStorage.setItem('cookiesAccepted', 'true');
+    link.addEventListener('click', () => setMenu(false));
 });
 
 // Scroll to Top Button
@@ -131,7 +87,6 @@ window.addEventListener('scroll', () => {
 // Preloader Logic
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
-    // Nascondi il preloader
     preloader.style.opacity = '0';
     setTimeout(() => {
         preloader.style.display = 'none';
@@ -142,7 +97,7 @@ window.addEventListener('load', () => {
 function scrollProgress() {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
     document.getElementById("myBar").style.width = scrolled + "%";
 }
 
@@ -151,16 +106,15 @@ const emailForm = document.getElementById('emailForm');
 if (emailForm) {
     emailForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const nome = this.querySelector('input[name="nome"]').value;
-        const email = this.querySelector('input[name="email"]').value;
-        const messaggio = this.querySelector('textarea[name="messaggio"]').value;
-        
-        // INSERISCI QUI SOTTO L'EMAIL REALE DOVE VUOI RICEVERE I MESSAGGI
-        const destinatario = "Ostetrica.giudittamontella@gmail.com"; 
+
+        const nome = this.querySelector('input[name="nome"]').value.trim();
+        const email = this.querySelector('input[name="email"]').value.trim();
+        const messaggio = this.querySelector('textarea[name="messaggio"]').value.trim();
+
+        const destinatario = "ostetrica.giudittamontella@gmail.com";
         const oggetto = `Richiesta dal sito web da ${nome}`;
-        const corpo = `Nome: ${nome}%0D%0AEmail: ${email}%0D%0A%0D%0AMessaggio:%0D%0A${messaggio}`;
-        
-        window.location.href = `mailto:${destinatario}?subject=${oggetto}&body=${corpo}`;
+        const corpo = `Nome: ${nome}\r\nEmail: ${email}\r\n\r\nMessaggio:\r\n${messaggio}`;
+
+        window.location.href = `mailto:${destinatario}?subject=${encodeURIComponent(oggetto)}&body=${encodeURIComponent(corpo)}`;
     });
 }

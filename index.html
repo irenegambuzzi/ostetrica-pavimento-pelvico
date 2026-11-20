@@ -4,17 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ostetrica Specialista | Riabilitazione Pavimento Pelvico</title>
-    
+    <meta name="description" content="Ostetrica specialista in riabilitazione del pavimento pelvico. Gravidanza, post-parto e salute della donna a Mirandola (MO).">
+
+    <!-- Anteprima social (WhatsApp, Facebook, ecc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:url" content="https://irenegambuzzi.github.io/ostetrica-pavimento-pelvico/">
+    <meta property="og:title" content="Giuditta Maria Montella | Ostetrica a Mirandola">
+    <meta property="og:description" content="Ostetrica specialista in riabilitazione del pavimento pelvico. Gravidanza, post-parto e salute della donna a Mirandola (MO).">
+    <meta property="og:image" content="https://irenegambuzzi.github.io/ostetrica-pavimento-pelvico/assets/foto-giuditta.jpg">
+    <meta property="og:image:width" content="826">
+    <meta property="og:image:height" content="1032">
+    <meta property="og:image:alt" content="Giuditta Maria Montella, ostetrica, con un modello del bacino">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <!-- Preloader -->
     <div id="preloader" class="preloader">
-        <i class="fa-solid fa-spa lotus-animation"></i>
+        <img src="assets/logo.png" alt="" class="lotus-animation">
     </div>
 
     <!-- Scroll Progress Bar -->
@@ -34,12 +51,12 @@
             <img src="assets/logo.png" alt="Dott.ssa Montella Logo">
         </div>
         <!-- Icona Hamburger per Mobile -->
-        <div class="burger">
+        <button class="burger" type="button" aria-label="Apri il menù" aria-expanded="false" aria-controls="nav-links">
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
-        </div>
-        <ul class="nav-links">
+        </button>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#percorso">Il mio percorso</a></li>
             <li><a href="#servizi">Servizi</a></li>
             <li><a href="#contatti" class="btn-nav">Contattami</a></li>
@@ -50,8 +67,13 @@
         <div class="hero-content reveal">
             <h1>Accanto a te,<br><span>in ogni momento.</span></h1>
             <p>Dott.ssa Giuditta Maria Montella<br>Ostetrica specialista in riabilitazione del pavimento pelvico. <br>Ascolto, cura e professionalità per il tuo benessere intimo.</p>
-            <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" class="btn">Prenota su MioDottore</a>
-            <a href="#servizi" class="btn btn-alt">I miei servizi</a>
+            <div class="hero-buttons">
+                <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn">Prenota su MioDottore</a>
+                <a href="#servizi" class="btn btn-alt">I miei servizi</a>
+            </div>
+        </div>
+        <div class="hero-photo reveal">
+            <img src="assets/foto-giuditta.jpg" alt="Giuditta Maria Montella, ostetrica, con un modello del bacino" width="826" height="1032">
         </div>
     </header>
 
@@ -65,19 +87,19 @@
         </div>
     </section>
 
-    <!-- Sezione Statistiche -->
+    <!-- Punti chiave -->
     <section class="stats reveal">
         <div class="stat-item">
-            <h3 class="counter" data-target="10">0</h3>
-            <p>Anni di Esperienza</p>
+            <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <p>Laureata a Modena e Reggio Emilia</p>
         </div>
         <div class="stat-item">
-            <h3 class="counter" data-target="500">0</h3>
-            <p>Donne Supportate</p>
+            <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+            <p>Specializzata a Parma in riabilitazione del pavimento pelvico</p>
         </div>
         <div class="stat-item">
-            <h3 class="counter" data-target="100">0</h3>
-            <p>Empatia e Ascolto</p>
+            <div class="stat-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <p>Studio a Mirandola, Via Felice Cavallotti 16</p>
         </div>
     </section>
 
@@ -86,23 +108,20 @@
             <h2>Cosa posso fare per te</h2>
             <p>Percorsi personalizzati per il tuo benessere.</p>
         </div>
-        
+
         <div class="services-grid reveal">
-            <!-- Placeholder Servizio 1 -->
             <div class="service-card">
                 <div class="icon"><i class="fa-solid fa-heart-pulse"></i></div>
                 <h3>Riabilitazione Pelvica</h3>
                 <p>Un percorso dedicato per ritrovare funzionalità e benessere, trattando disfunzioni e dolore con delicatezza e tecniche all'avanguardia.</p>
             </div>
 
-            <!-- Placeholder Servizio 2 -->
             <div class="service-card">
                 <div class="icon"><i class="fa-solid fa-baby-carriage"></i></div>
                 <h3>Gravidanza e Post-Parto</h3>
                 <p>Accompagnamento ostetrico durante i mesi dell'attesa e supporto fondamentale nei primi mesi di vita del bambino.</p>
             </div>
 
-            <!-- Placeholder Servizio 3 -->
             <div class="service-card">
                 <div class="icon"><i class="fa-solid fa-venus"></i></div>
                 <h3>Consulenza Donna</h3>
@@ -111,33 +130,21 @@
         </div>
     </section>
 
-    <!-- Nuova Sezione Testimonianze con Onde -->
+    <!-- Recensioni con Onde -->
     <div class="wave-divider top">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
         </svg>
     </div>
 
     <section class="testimonials reveal">
         <h2>Dicono di me</h2>
-        <div class="testimonial-container">
-            <div class="testimonial-card">
-                <p>"La Dottoressa Montella è di una dolcezza infinita. Mi ha fatto sentire subito a mio agio."</p>
-                <span>- Giulia R.</span>
-            </div>
-            <div class="testimonial-card">
-                <p>"Professionale e competente. Il percorso di riabilitazione mi ha cambiato la vita."</p>
-                <span>- Elena M.</span>
-            </div>
-            <div class="testimonial-card">
-                <p>"Un punto di riferimento sicuro per ogni donna. Grazie di cuore."</p>
-                <span>- Sara T.</span>
-            </div>
-        </div>
+        <p>Leggi le esperienze delle pazienti su MioDottore.</p>
+        <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn btn-white">Leggi le recensioni</a>
     </section>
 
     <div class="wave-divider bottom">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
         </svg>
     </div>
@@ -161,7 +168,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="accordion-content">
-                    <p>Assolutamente no. Le tecniche utilizzate sono delicate e rispettose del tuo corpo. Il mio approccio è sempre graduale e basato sul tuo comfort.</p>
+                    <p>Le tecniche utilizzate sono delicate e rispettose del tuo corpo. Il percorso è sempre graduale e si adatta al tuo comfort: ogni passo si concorda insieme.</p>
                 </div>
             </div>
             <div class="accordion-item">
@@ -179,12 +186,12 @@
     <section id="contatti" class="contact reveal">
         <h2>Parliamone insieme</h2>
         <p>Hai dubbi o vuoi fissare un appuntamento? Scrivimi qui sotto.</p>
-        
-        <!-- Form configurato per apertura diretta Email -->
+
+        <!-- Il modulo apre il programma di posta con il messaggio già compilato -->
         <form class="contact-form" id="emailForm">
-            <div class="form-group"><input type="text" name="nome" placeholder="Il tuo nome" required></div>
-            <div class="form-group"><input type="email" name="email" placeholder="La tua email" required></div>
-            <div class="form-group"><textarea name="messaggio" rows="5" placeholder="Come posso aiutarti?" required></textarea></div>
+            <div class="form-group"><input type="text" name="nome" placeholder="Il tuo nome" aria-label="Il tuo nome" required></div>
+            <div class="form-group"><input type="email" name="email" placeholder="La tua email" aria-label="La tua email" required></div>
+            <div class="form-group"><textarea name="messaggio" rows="5" placeholder="Come posso aiutarti?" aria-label="Il tuo messaggio" required></textarea></div>
             <button type="submit" class="btn">Invia Messaggio</button>
         </form>
     </section>
@@ -193,37 +200,33 @@
     <section class="cta-final reveal">
         <h2>Pronta a prenderti cura di te?</h2>
         <p>Il benessere inizia dal primo passo. Prenota ora la tua visita.</p>
-        <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" class="btn">Prenota Appuntamento</a>
+        <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn">Prenota Appuntamento</a>
     </section>
 
-    <!-- Cookie Banner -->
-    <div id="cookie-banner" class="cookie-banner">
-        <p>Questo sito utilizza i cookie per garantirti la migliore esperienza. <a href="#">Leggi la Privacy Policy</a>.</p>
-        <button id="accept-cookies" class="btn btn-sm">Accetto</button>
-    </div>
-
     <!-- Scroll to Top Button -->
-    <a href="#" class="scroll-top">
-        <i class="fa-solid fa-arrow-up"></i>
+    <a href="#" class="scroll-top" aria-label="Torna su">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </a>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/393477315683" class="whatsapp-btn" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
+    <a href="https://wa.me/393477315683" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <footer>
         <div class="footer-content">
+            <img src="assets/logo.png" alt="" class="footer-logo-img">
             <div class="footer-logo">Dott.ssa Montella</div>
             <div class="footer-info">
-                <p><i class="fa-solid fa-location-dot"></i> Via Felice Cavallotti, 16, 41037 Mirandola (MO)</p>
-                <p><i class="fa-solid fa-phone"></i> +39 347 731 5683</p>
+                <p><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Via Felice Cavallotti, 16, 41037 Mirandola (MO)</p>
+                <p><i class="fa-solid fa-phone" aria-hidden="true"></i> <a href="tel:+393477315683">+39 347 731 5683</a></p>
+                <p><i class="fa-solid fa-envelope" aria-hidden="true"></i> <a href="mailto:ostetrica.giudittamontella@gmail.com">ostetrica.giudittamontella@gmail.com</a></p>
             </div>
             <div class="social-links">
-                <a href="https://www.instagram.com/ostetrica_giudittamontella/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.facebook.com/share/1KZBrsP2gh/?mibextid=wwXIfr" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ostetrica_giudittamontella/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.facebook.com/share/1KZBrsP2gh/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
             </div>
-            <p>&copy; 2024 Dott.ssa Giuditta Maria Montella - P.IVA 04219680362</p>
+            <p>&copy; 2026 Dott.ssa Giuditta Maria Montella - P.IVA 04219680362</p>
         </div>
     </footer>
 

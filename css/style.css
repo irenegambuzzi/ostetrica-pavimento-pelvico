@@ -67,6 +67,9 @@ nav {
 .burger {
     display: none;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
 }
 
 .burger div {
@@ -79,21 +82,69 @@ nav {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
-    height: 100dvh; /* Ottimizzazione per barre indirizzi mobili (iPhone) */
-    display: flex;
+    min-height: 100vh;
+    min-height: 100dvh; /* Ottimizzazione per barre indirizzi mobili (iPhone) */
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    gap: 60px;
+    padding: 160px 10% 150px; /* Spazio per il menù sopra e per la card "Chi sono" sotto */
+    text-align: left;
     position: relative;
-    overflow: hidden;
 }
 
 .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem; /* Testo leggermente più piccolo */
+    font-size: clamp(2.4rem, 4.6vw, 3.5rem);
     line-height: 1.2;
     margin-bottom: 20px;
+}
+
+.hero-content p {
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.hero-buttons .btn {
+    margin-top: 0;
+}
+
+.hero-buttons .btn-alt {
+    margin-left: 0;
+}
+
+/* Foto con forma ad arco e ombra verde salvia */
+.hero-photo {
+    position: relative;
+    justify-self: center;
+    width: 100%;
+    max-width: 420px;
+    isolation: isolate;
+}
+
+.hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: 22px -22px -22px 22px;
+    background: var(--accent);
+    border-radius: 999px 999px 40px 40px;
+    z-index: -1;
+}
+
+.hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 826 / 1032;
+    object-fit: cover;
+    border-radius: 999px 999px 40px 40px;
+    box-shadow: 0 30px 60px rgba(126, 156, 126, 0.35);
 }
 
 .hero h1 span {
@@ -221,36 +272,22 @@ nav {
 
 .testimonials h2 {
     color: white;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
-.testimonial-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
-
-.testimonial-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 350px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.testimonial-card p {
-    font-style: italic;
-    margin-bottom: 15px;
+.testimonials p {
     font-size: 1.1rem;
 }
 
-.testimonial-card span {
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.btn-white {
+    background: white;
+    color: var(--primary-dark);
+    box-shadow: 0 10px 20px rgba(90, 106, 95, 0.2);
+}
+
+.btn-white:hover {
+    background: var(--bg-light);
+    color: var(--text-dark);
 }
 
 /* Stats Section */
@@ -264,23 +301,28 @@ nav {
     gap: 30px;
 }
 
-.stat-item h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: var(--text-dark);
-    margin-bottom: 5px;
+.stat-item {
+    flex: 1 1 220px;
+    max-width: 300px;
 }
-/* Aggiunta simbolo + dopo il numero animato */
-.stat-item h3::after {
-    content: '+';
-    font-size: 1.5rem;
+
+.stat-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: white;
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .stat-item p {
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 /* FAQ Section */
@@ -395,38 +437,13 @@ input:focus, textarea:focus {
 .cta-final {
     padding: 80px 10%;
     text-align: center;
-    background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('../assets/img/hero-bg.jpg'); /* Fallback elegante */
-    background-size: cover;
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .cta-final h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
-
-/* Cookie Banner */
-.cookie-banner {
-    position: fixed;
-    bottom: -100%; /* Nascosto inizialmente */
-    left: 0;
-    width: 100%;
-    background: var(--text-dark);
-    color: white;
-    padding: 20px 10%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2000;
-    transition: bottom 0.5s ease-in-out;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-}
-
-.cookie-banner.show {
-    bottom: 0;
-}
-
-.cookie-banner a { color: var(--accent); text-decoration: underline; }
-.btn-sm { padding: 10px 20px; margin-top: 0; font-size: 0.8rem; }
 
 /* Scroll Top Button */
 .scroll-top {
@@ -463,6 +480,15 @@ footer {
     margin-top: 50px;
 }
 
+.footer-logo-img {
+    display: block;
+    width: 64px;
+    height: auto;
+    margin: 0 auto 12px;
+    filter: brightness(0) invert(1); /* Versione chiara del logo sul fondo scuro */
+    opacity: 0.9;
+}
+
 .footer-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
@@ -483,6 +509,14 @@ footer {
 }
 
 .footer-info i { color: var(--primary); }
+
+.footer-info a {
+    color: white;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.footer-info a:hover { text-decoration: underline; }
 
 .social-links {
     margin-bottom: 20px;
@@ -564,20 +598,14 @@ footer {
     100% { transform: translate(30px, 50px) rotate(10deg); }
 }
 
-@keyframes morph {
-    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-}
-
 /* RESPONSIVE DESIGN (Mobile) */
 @media screen and (max-width: 768px) {
     .nav-links {
         position: absolute;
         right: 0px;
-        height: 92vh;
-        height: 92dvh; /* Ottimizzazione mobile */
-        top: 8vh;
+        height: 100vh;
+        height: 100dvh; /* Ottimizzazione mobile */
+        top: 100%; /* Il pannello parte sotto la barra del menù */
         background-color: var(--bg-light);
         display: flex;
         flex-direction: column;
@@ -597,19 +625,37 @@ footer {
         display: block;
     }
 
-    .hero h1 { font-size: 2.5rem; }
-    
-    .about {
+    .logo { max-width: 64px; }
+
+    .hero {
         grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 125px 6% 130px;
         text-align: center;
-        gap: 40px;
     }
 
-    .about-image { order: -1; } /* Immagine sopra il testo */
-    
-    .stats { flex-direction: column; gap: 50px; }
-    
-    .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
+    .hero-photo {
+        order: -1; /* Foto sopra il testo */
+        max-width: 230px;
+    }
+
+    .hero-photo::before { inset: 12px -12px -12px 12px; }
+
+    .hero h1 { font-size: 2.4rem; }
+
+    .hero-buttons { justify-content: center; }
+
+    .about { padding: 0 6% 80px; }
+
+    .about-text { padding: 45px 25px; }
+
+    .stats { flex-direction: column; align-items: center; gap: 40px; }
+
+    .stat-item { flex: none; }
+
+    footer { padding: 50px 5% 100px; } /* Spazio per i bottoni WhatsApp e "torna su" */
+
+    .footer-info { font-size: 0.85rem; }
 }
 
 /* Animazione Burger */
@@ -633,15 +679,15 @@ footer {
 }
 
 .lotus-animation {
-    font-size: 80px;
-    color: var(--primary);
+    width: 90px;
+    height: auto;
     animation: bloom 2s infinite ease-in-out;
 }
 
 @keyframes bloom {
-    0% { transform: scale(0.8); opacity: 0.6; }
-    50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px rgba(156, 175, 136, 0.6); }
-    100% { transform: scale(0.8); opacity: 0.6; }
+    0% { transform: scale(0.8); opacity: 0.6; filter: drop-shadow(0 0 0 rgba(156, 175, 136, 0)); }
+    50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 20px rgba(156, 175, 136, 0.6)); }
+    100% { transform: scale(0.8); opacity: 0.6; filter: drop-shadow(0 0 0 rgba(156, 175, 136, 0)); }
 }
 
 /* WHATSAPP BUTTON */
@@ -672,3 +718,27 @@ footer {
 /* SCROLL PROGRESS BAR */
 .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 5px; background: transparent; z-index: 2000; }
 .progress-bar { height: 5px; background: var(--primary); width: 0%; border-radius: 0 5px 5px 0; }
+
+/* Le ancore del menù non finiscono sotto la barra fissa */
+section[id] { scroll-margin-top: 130px; }
+
+/* Meno movimento per chi lo preferisce */
+@media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .btn:hover,
+    .service-card:hover,
+    .whatsapp-btn:hover {
+        transform: none;
+    }
+}
