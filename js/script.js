@@ -1,105 +1,72 @@
-window.addEventListener('scroll', reveal);
-window.addEventListener('scroll', scrollProgress);
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function reveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    const revealPoint = 150;
-    const windowHeight = window.innerHeight;
+// Comparsa degli elementi durante lo scroll
+const revealEls = document.querySelectorAll('.reveal');
 
-    reveals.forEach(element => {
-        const revealTop = element.getBoundingClientRect().top;
-
-        if (revealTop < windowHeight - revealPoint) {
-            element.classList.add('active');
-        }
-    });
-}
-
-// Esegui una volta al caricamento per mostrare la Hero
-document.addEventListener("DOMContentLoaded", reveal);
-
-// Effetto Parallasse Mouse per i Blob (disattivato se l'utente preferisce meno animazioni)
-if (!reduceMotion) {
-    document.addEventListener('mousemove', (e) => {
-        const blobs = document.querySelectorAll('.blob');
-
-        blobs.forEach((blob, index) => {
-            const speed = (index + 1) * 20; // Velocità diversa per ogni blob
-            const xOffset = (window.innerWidth / 2 - e.clientX) / speed;
-            const yOffset = (window.innerHeight / 2 - e.clientY) / speed;
-
-            blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+if ('IntersectionObserver' in window && !reduceMotion) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
         });
-    });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+} else {
+    revealEls.forEach(el => el.classList.add('active'));
 }
+
+// Barra di navigazione: sfondo quando si scorre, bottone "torna su"
+const siteNav = document.getElementById('siteNav');
+const scrollTopBtn = document.querySelector('.scroll-top');
+
+function onScroll() {
+    const y = window.scrollY;
+    siteNav.classList.toggle('scrolled', y > 24);
+    scrollTopBtn.classList.toggle('active', y > 600);
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 // Accordion FAQ
-const accordionItems = document.querySelectorAll('.accordion-item');
-
-accordionItems.forEach(item => {
+document.querySelectorAll('.accordion-item').forEach(item => {
     const header = item.querySelector('.accordion-header');
 
     header.addEventListener('click', () => {
-        item.classList.toggle('active');
-        const content = item.querySelector('.accordion-content');
-        if (item.classList.contains('active')) {
-            content.style.maxHeight = content.scrollHeight + "px";
-        } else {
-            content.style.maxHeight = 0;
-        }
+        const open = item.classList.toggle('active');
+        header.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 });
 
-// Mobile Menu Toggle
+// Menù mobile
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
-const navLinks = document.querySelectorAll('.nav-links li');
 
 function setMenu(open) {
     nav.classList.toggle('nav-active', open);
     burger.classList.toggle('toggle', open);
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.setAttribute('aria-label', open ? 'Chiudi il menù' : 'Apri il menù');
+    document.body.style.overflow = open ? 'hidden' : '';
 }
 
 burger.addEventListener('click', () => {
     setMenu(!nav.classList.contains('nav-active'));
 });
 
-// Chiudi menu quando si clicca un link
-navLinks.forEach(link => {
+nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => setMenu(false));
 });
 
-// Scroll to Top Button
-const scrollTopBtn = document.querySelector('.scroll-top');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollTopBtn.classList.add('active');
-    } else {
-        scrollTopBtn.classList.remove('active');
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('nav-active')) {
+        setMenu(false);
+        burger.focus();
     }
 });
-
-// Preloader Logic
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    preloader.style.opacity = '0';
-    setTimeout(() => {
-        preloader.style.display = 'none';
-    }, 500); // Aspetta che finisca la transizione di opacità
-});
-
-// Scroll Progress Bar Logic
-function scrollProgress() {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-    document.getElementById("myBar").style.width = scrolled + "%";
-}
 
 // Gestione Invio Email (Mailto)
 const emailForm = document.getElementById('emailForm');
