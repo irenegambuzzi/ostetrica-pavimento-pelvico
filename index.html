@@ -25,10 +25,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
 
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <!-- Font ospitati sul sito (nessuna richiesta a servizi esterni) -->
+    <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/playfair-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -60,8 +60,7 @@
         },
         "sameAs": [
             "https://www.instagram.com/ostetrica_giudittamontella/",
-            "https://www.facebook.com/share/1KZBrsP2gh/?mibextid=wwXIfr",
-            "https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola"
+            "https://www.facebook.com/share/1KZBrsP2gh/?mibextid=wwXIfr"
         ]
     }
     </script>
@@ -77,6 +76,9 @@
             <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M12 20.2s-7.6-4.6-9.3-9.7C1.6 7.2 3.7 4 7.1 4c2 0 3.5 1.1 4.9 3 1.4-1.9 2.9-3 4.9-3 3.4 0 5.5 3.2 4.4 6.5-1.7 5.1-9.3 9.7-9.3 9.7z"/><path d="M4 12h3.6l1.8-2.8 2.8 5.6 1.8-2.8H20"/></symbol>
             <symbol id="i-bloom" viewBox="0 0 24 24"><path d="M12 2.8c3.9 0 7 5.6 7 10.2a7 7 0 0 1-14 0c0-4.6 3.1-10.2 7-10.2z"/><path d="M12 16.6s-2.9-1.7-2.9-3.7c0-1 .8-1.7 1.6-1.7.6 0 1 .3 1.3.8.3-.5.7-.8 1.3-.8.8 0 1.6.7 1.6 1.7 0 2-2.9 3.7-2.9 3.7z"/></symbol>
             <symbol id="i-venus" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="5.5"/><path d="M12 14v8M8.5 18.5h7"/></symbol>
+            <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.2s-7.6-4.6-9.3-9.7C1.6 7.2 3.7 4 7.1 4c2 0 3.5 1.1 4.9 3 1.4-1.9 2.9-3 4.9-3 3.4 0 5.5 3.2 4.4 6.5-1.7 5.1-9.3 9.7-9.3 9.7z"/></symbol>
+            <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.2 2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6-4.5-4.2 6.1-.8z"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
             <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
             <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
             <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></symbol>
@@ -111,6 +113,10 @@
 
     <header class="hero wrap">
         <div class="hero-content">
+            <button type="button" class="notice-pill hero-in" style="--d:.05s" data-open-notice>
+                <svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg>
+                In dolce attesa · tornerò presto
+            </button>
             <p class="eyebrow hero-in" style="--d:.1s">Ostetrica a Mirandola (MO)</p>
             <h1 aria-label="Accanto a te, in ogni momento.">
                 <span class="line" aria-hidden="true"><span class="w" style="--d:.2s">Accanto</span> <span class="w" style="--d:.28s">a</span> <span class="w" style="--d:.36s">te,</span></span>
@@ -118,8 +124,9 @@
             </h1>
             <p class="hero-text hero-in" style="--d:.8s">Dott.ssa Giuditta Maria Montella<br>Ostetrica specialista in riabilitazione del pavimento pelvico. <br>Ascolto, cura e professionalità per il tuo benessere intimo.</p>
             <div class="hero-buttons hero-in" style="--d:.92s">
-                <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn">
-                    Prenota su MioDottore
+                <!-- Durante la pausa maternità: al rientro rimettere il link di prenotazione MioDottore -->
+                <a href="https://wa.me/393477315683" target="_blank" rel="noopener" class="btn">
+                    Scrivimi su WhatsApp
                     <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
                 </a>
                 <a href="#servizi" class="link-arrow">I miei servizi</a>
@@ -212,16 +219,31 @@
             </svg>
         </div>
 
-        <section class="testimonials">
-            <div class="testimonials-inner reveal">
-                <span class="quote-mark" aria-hidden="true">&ldquo;</span>
-                <p class="eyebrow eyebrow-light">Recensioni</p>
-                <h2>Dicono di me</h2>
-                <p>Leggi le esperienze delle pazienti su MioDottore.</p>
-                <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn btn-white">
-                    Leggi le recensioni
-                    <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
-                </a>
+        <section class="testimonials" aria-labelledby="recensioni-title">
+            <div class="testimonials-inner">
+                <div class="rating reveal">
+                    <p class="eyebrow eyebrow-light">Recensioni</p>
+                    <h2 id="recensioni-title">Dicono di me</h2>
+                    <div class="rating-score">
+                        <span class="rating-num">5,0</span>
+                        <span class="rating-meta">
+                            <span class="stars" role="img" aria-label="5 stelle su 5">
+                                <svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>
+                            </span>
+                            <span>7 recensioni verificate su MioDottore</span>
+                        </span>
+                    </div>
+                </div>
+                <figure class="review reveal" style="--d:.12s">
+                    <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+                    <blockquote>
+                        <p>Ostetrica estremamente professionale, gentile, assolutamente chiara nelle spiegazioni e premurosa nelle domande.</p>
+                    </blockquote>
+                    <figcaption>
+                        <span class="review-name">Elisa</span>
+                        <span class="review-date">Recensione su MioDottore · maggio 2026</span>
+                    </figcaption>
+                </figure>
             </div>
         </section>
 
@@ -303,6 +325,7 @@
                         <textarea id="f-msg" name="messaggio" rows="4" placeholder=" " required></textarea>
                         <label for="f-msg">Come posso aiutarti?</label>
                     </div>
+                    <p class="form-note">Il modulo apre il tuo programma di posta: il sito non salva i tuoi dati. Leggi l'<a href="privacy.html">informativa privacy</a>.</p>
                     <button type="submit" class="btn">
                         Invia Messaggio
                         <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
@@ -316,9 +339,10 @@
             <img src="assets/logo.png" alt="" class="cta-mark" width="337" height="421" loading="lazy">
             <div class="cta-inner reveal">
                 <h2>Pronta a prenderti cura di te?</h2>
-                <p>Il benessere inizia dal primo passo. Prenota ora la tua visita.</p>
-                <a href="https://www.miodottore.it/giuditta-maria-montella/ostetrica/mirandola" target="_blank" rel="noopener" class="btn">
-                    Prenota Appuntamento
+                <p>Il benessere inizia dal primo passo. Scrivimi: fisseremo insieme il tuo primo incontro al mio rientro.</p>
+                <!-- Durante la pausa maternità: al rientro rimettere "Prenota Appuntamento" con il link MioDottore -->
+                <a href="https://wa.me/393477315683" target="_blank" rel="noopener" class="btn">
+                    Scrivimi su WhatsApp
                     <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
                 </a>
             </div>
@@ -358,8 +382,28 @@
         </div>
         <div class="footer-bottom wrap">
             <p>&copy; 2026 Dott.ssa Giuditta Maria Montella - P.IVA 04219680362</p>
+            <p><a href="privacy.html">Privacy e cookie</a></p>
         </div>
     </footer>
+
+    <!-- Avviso pausa maternità (si disattiva da js/script.js: AVVISO_MATERNITA) -->
+    <dialog class="notice" id="noticeDialog" aria-labelledby="notice-title">
+        <button type="button" class="notice-close" data-close-notice aria-label="Chiudi l'avviso">
+            <svg class="ic" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+        <img src="assets/logo-small.png" alt="" class="notice-mark" width="160" height="180">
+        <p class="eyebrow">Una bella notizia</p>
+        <h2 id="notice-title">Sono in <em>dolce attesa</em></h2>
+        <p>In questi mesi mi prendo una pausa per vivere da vicino questo momento così speciale. Tornerò presto a prendermi cura di te, con la stessa attenzione di sempre.</p>
+        <p>Nel frattempo puoi scrivermi: ti risponderò appena possibile.</p>
+        <div class="notice-actions">
+            <a href="https://wa.me/393477315683" target="_blank" rel="noopener" class="btn">
+                Scrivimi su WhatsApp
+                <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <button type="button" class="link-arrow" data-close-notice>Continua sul sito</button>
+        </div>
+    </dialog>
 
     <script src="js/script.js" defer></script>
 </body>

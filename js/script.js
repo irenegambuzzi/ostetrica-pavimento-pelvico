@@ -1,3 +1,6 @@
+// Avviso pausa maternità: metti false per spegnerlo al rientro
+const AVVISO_MATERNITA = true;
+
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Comparsa degli elementi durante lo scroll
@@ -84,4 +87,51 @@ if (emailForm) {
 
         window.location.href = `mailto:${destinatario}?subject=${encodeURIComponent(oggetto)}&body=${encodeURIComponent(corpo)}`;
     });
+}
+
+// Avviso maternità: si apre alla prima visita, poi resta raggiungibile dall'etichetta nella hero
+const noticeDialog = document.getElementById('noticeDialog');
+const noticePill = document.querySelector('[data-open-notice]');
+const NOTICE_KEY = 'avviso-maternita-visto';
+
+function noticeSeen() {
+    try { return localStorage.getItem(NOTICE_KEY) === '1'; } catch (e) { return false; }
+}
+
+function rememberNotice() {
+    try { localStorage.setItem(NOTICE_KEY, '1'); } catch (e) { /* navigazione privata: pazienza */ }
+}
+
+function openNotice() {
+    if (noticeDialog && typeof noticeDialog.showModal === 'function' && !noticeDialog.open) {
+        noticeDialog.showModal();
+    }
+}
+
+function closeNotice() {
+    if (noticeDialog && noticeDialog.open) noticeDialog.close();
+}
+
+if (!AVVISO_MATERNITA || !noticeDialog || typeof noticeDialog.showModal !== 'function') {
+    if (noticePill) noticePill.remove();
+    if (noticeDialog && !AVVISO_MATERNITA) noticeDialog.remove();
+} else {
+    noticeDialog.addEventListener('close', rememberNotice);
+
+    document.querySelectorAll('[data-close-notice]').forEach(btn => {
+        btn.addEventListener('click', closeNotice);
+    });
+
+    // Clic fuori dalla finestra = chiudi
+    noticeDialog.addEventListener('click', (e) => {
+        const r = noticeDialog.getBoundingClientRect();
+        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) closeNotice();
+    });
+
+    if (noticePill) noticePill.addEventListener('click', openNotice);
+
+    if (!noticeSeen()) {
+        setTimeout(openNotice, reduceMotion ? 300 : 1600);
+    }
 }
